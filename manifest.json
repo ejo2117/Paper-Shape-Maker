@@ -1,0 +1,7 @@
+{
+  "name": "Ethan's Paper Maker",
+  "id": "980490947487793938",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html"
+}

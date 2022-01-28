@@ -1,0 +1,120 @@
+<style>
+  body {
+    font-size: 12px;
+    font-family: Neue Einstellung, Helvetica, Arial, sans-serif;
+    text-align: center;
+    margin: 20px;
+
+  }
+
+
+  input {
+    border: none;
+    outline: none;
+    padding: 8px;
+    font-family: Neue Einstellung, Helvetica, Arial, sans-serif;
+  }
+
+  input:hover {
+    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  }
+
+  button:focus {
+    box-shadow: inset 0 0 0 2px #18A0FB;
+  }
+
+  #create:focus {
+    box-shadow: inset 0 0 0 2px rgba(0, 0, 0, 0.3);
+  }
+
+  input:focus {
+    box-shadow: inset 0 0 0 2px #18A0FB;
+  }
+
+  h2 {
+
+    text-align: center;
+  }
+
+  p {
+
+    margin: 15px auto;
+  }
+
+  .button-wrap {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+
+  }
+
+  button {
+    flex: 0 0 96%;
+    background: #080593;
+    margin: 10px auto;
+    padding: 15px;
+    width: 200px;
+    height: 45px;
+    transition: 0.2s;
+    border-radius: 0px;
+    outline: none;
+    border: 0px;
+    cursor: pointer;
+    color: white;
+    font-family: Neue Einstellung, Helvetica, Arial, sans-serif;
+    font-weight: bold;
+  }
+
+  button:hover {
+    color: #080593;
+    background: #D6D5FE;
+  }
+
+  button#cancel {
+    background: #FED5D5;
+    display: none;
+    color: #FF3111;
+  }
+
+  button#cancel:hover {
+    background: #FF3111;
+    ;
+    color: white;
+
+  }
+</style>
+
+<h2>Cut Paper Generator</h2>
+<p>Width: <input id="width" value="1000"></p>
+<p>Height: <input id="height" value="200"></p>
+<p>Index: <input id="deviation-index" value="2"></p>
+<p>Strength: <input id="deviation-strength" value="10"></p>
+<div class="button-wrap">
+  <button id="create">Create</button>
+  <button id="cancel">Cancel</button>
+</div>
+<script>
+
+  document.getElementById('create').onclick = () => {
+
+    const widthInput = document.getElementById('width');
+    const width = parseInt(widthInput.value, 10);
+
+    const heightInput = document.getElementById('height');
+    const height = parseInt(heightInput.value, 10);
+
+    const deviationInput = document.getElementById('deviation-index');
+    const deviation = parseInt(deviationInput.value, 10);
+
+    const deviationStrengthInput = document.getElementById('deviation-strength');
+    const deviationStrength = parseInt(deviationStrengthInput.value, 10);
+
+    parent.postMessage({ pluginMessage: { type: 'create-paper', width, height, deviation, deviationStrength, batchSize: 'single' } }, '*')
+  }
+
+  document.getElementById('cancel').onclick = () => {
+    parent.postMessage({ pluginMessage: { type: 'cancel' } }, '*')
+  }
+
+</script>
